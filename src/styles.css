@@ -1,0 +1,14 @@
+/* Add application styles & imports to this file! */
+
+form{
+    padding: 5px;
+}
+
+.nested-parent{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+label{
+    margin-right: 20px;
+}

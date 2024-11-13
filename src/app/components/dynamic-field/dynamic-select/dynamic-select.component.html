@@ -1,0 +1,20 @@
+<form >
+<div [ngClass]="{'nested-parent':getChild(field)?.length>0}">
+  <i *ngIf="getChild(field)?.length>0" class="fa fa-chevron-down" style="font-size: 12px;margin-right: 6px;font-weight: 600;"></i>
+  <label>{{field._template ? field._template?.label : field.label}}:</label>
+  <select style="padding: 4px;"
+    #dynamicSelect
+    (change)="changedValue(dynamicSelect.value)"
+  >
+    <!-- <option *ngFor="let option of field._template.options" [value]="option.value">
+      {{ option.label }}
+    </option> -->
+  </select>
+</div>
+  <ng-container *ngIf="field?.childKeyName">
+    <div style="padding-left: 25px"  *ngFor="let child of getChild(field)">
+      <app-field-input  [field]="field[child]"></app-field-input>
+      <app-dynamic-select *ngIf="child?.type=='select'" [field]="field[child]"></app-dynamic-select>
+  </div>
+</ng-container>
+</form>

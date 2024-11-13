@@ -1,0 +1,25 @@
+<form >
+    <div  >
+        <!-- <i *ngIf="getChild(field)?.length>0" class="fa fa-chevron-down" style="font-size: 12px;margin-right: 6px;font-weight: 600;"></i> -->
+        <label>{{field._template ? field._template?.label : field?.label}} : </label>
+        <input [type]="field._template?.type ? field._template?.type : field?.type"   />
+    </div>
+    <ng-container >
+        <div style="padding-left: 24px;"  *ngFor="let child of field|keyvalue">
+            <ng-container *ngIf="child['key']!='_template'">
+                <ng-container *ngIf="checkIfArray(child['value'])">
+                    <ng-container *ngFor="let childItem of child['value']">
+                        <app-field-input  [field]="childItem"></app-field-input>
+                        <!-- <app-dynamic-select *ngIf="childItem?.type=='select'" [field]="childItem"></app-dynamic-select> -->
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="!checkIfArray(child['value'])">
+                    <app-field-input  [field]="child.value"></app-field-input>
+                    <!-- <app-dynamic-select *ngIf="child?.value?.type=='select'" [field]="child.value"></app-dynamic-select> -->
+                </ng-container>
+                
+            </ng-container>
+    
+        </div>
+    </ng-container>
+</form>
